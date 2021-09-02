@@ -10,7 +10,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/blog">ITI Social</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -18,25 +18,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/posts">All posts <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
+
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -44,29 +31,30 @@
         </form>
     </div>
 </nav>
+<h3> All layouts </h3>
 
-<h1> All posts </h1>
-{{--@dd($posts)--}}
+<div class="container mt-5 bg-primary">
 
-   <table class="table table-hover">
-       <tr>
-           <th>title</th>
-           <th>description</th>
-           <th> operations </th>
-       </tr>
-       @foreach($posts as $post)
-           <tr>
-               <td> {{ $post['title']}} </td>
-               <td> {{ $post['body']}}
-                   {{$loop->index}}
-               </td>
-               <td> <a class="btn btn-primary" href="/posts/show/{{$loop->index}}"> Show </a> </td>
-               <td> <a class="btn btn-warning"> Eidt </a> </td>
-               <td> <a class="btn btn-danger"> Delete </a> </td>
+    @yield('testcontent')
 
-           </tr>
-       @endforeach
-   </table>
+</div>
+
+
+
+<div class="container mt-5">
+
+    @yield('maindiv')
+
+</div>
+
+<div class="bg-warning">
+    @yield('warningcontent')
+</div>
+
+
+<div class="bg-primary mt-2  container">
+    @yield('add')
+</div>
 
 
 
