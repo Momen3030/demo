@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AritcleController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -88,20 +91,63 @@ Route::get('/blog',function (){
 
 
 
+//all posts
+Route::get('/posts',[PostController::class,"index"]);
 
-Route::get('/posts',[App\Http\Controllers\PostController::class,"index"]);
+//id and return post of id
+Route::get('/posts/show/{post}',[PostController::class,"show"]);
+
+//show from insert data
+Route::get('/posts/create',[PostController::class,"create"]);
+//insert post in db
+Route::post('/posts/submit',[PostController::class,"store"]);
+
+// controller return one function
+// use invokable controller
+Route::get('/home',HomeController::class);
+
+//Route::get('/hello',[HomeController::class,'sayHi']); no meaning
 
 
-Route::get('/posts/show/{post}',[App\Http\Controllers\PostController::class,"show"]);
+/// resource controller
+/*
+index  ======> all post
+show  ======> post id
+create =====> view form insert data for post
+store =====> insert post in db
+edit ======> view from old data
+update =====> updata post in database
+destroy =======> delete post
+use crud operation [create,select,update,delete]
+*/
 
 
-Route::get('/posts/create',[App\Http\Controllers\PostController::class,"create"]);
+//Route::get('articles',[AritcleController::class,'index'])
+//    ->name('articles.index');
+//
+//Route::get('articles/{article}',[AritcleController::class,'show'])
+//    ->name('articles.show');
+//
+//Route::get('/articles/create',[AritcleController::class,'create'])->name('artiles.create');
+//
+Route::resource('articles',AritcleController::class);
+/// put request update
+//Route::put('/articles/{article}',[AritcleController::class,'update']);
 
-Route::post('/posts/submit',[App\Http\Controllers\PostController::class,"store"]);
 
 
 
-
-
-
-
+////table db in laravel  Model
+///
+/// Eluquent Model ORM
+/// Post mode create instance
+/// Post::all()
+///ORM ====> object Relatian mapping [design pattern]
+///// data maper=====>software layer spreate  data database inside momery object  object
+///
+/// datamaper=====>active record  software layer represented
+///  bussinss logic inside model    ///relationships
+///
+////ORM
+/// *datamaper
+///   *active Recod
