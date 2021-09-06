@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
-@section('maindiv')
-{{--    @dd($article)--}}
+@section('content')
+
     <form action="{{route('articles.update',[$article])}}" method="post">
         @csrf
         @method('put')

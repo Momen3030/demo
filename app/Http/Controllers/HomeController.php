@@ -7,26 +7,22 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Create a new controller instance.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function __invoke(Request $request)
+    public function __construct()
     {
-        $posts=[
-            "post1"=>"post one content",
-            "post2"=>"post two content",
-            "post3"=>"post three content",
-            "post4"=>10,
-
-        ];
-        return  view('home',["postsData"=>$posts]);
+        $this->middleware('auth');
     }
 
-//    public function sayHi(){
-//        return "hi";
-//    }
-
-
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('home');
+    }
 }

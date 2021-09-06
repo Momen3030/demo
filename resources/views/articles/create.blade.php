@@ -1,18 +1,23 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
-@section('maindiv')
+@section('content')
 
-{{--@dd($users)--}}
     <form action="{{route('articles.store')}}" method="post">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" name="title">
+            <input type="text" value="{{old('title')}}" class="form-control" name="title">
+            @error('title')
+              <p class="text-danger">{{$message}}</p>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="body">Content</label>
-            <textarea class="form-control" rows="3" name="body"></textarea>
+            <textarea class="form-control" rows="3" name="body">{{old('body')}}</textarea>
+            @error('body')
+            <p class="text-danger">{{$message}}</p>
+            @enderror
         </div>
         <div class="form-group">
             <label>Author</label>

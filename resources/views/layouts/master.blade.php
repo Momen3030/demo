@@ -21,7 +21,7 @@
                 <a class="nav-link" href="/posts">All posts <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="{{route('articles.index')}}">Articles</a>
             </li>
 
         </ul>
@@ -32,6 +32,18 @@
     </div>
 </nav>
 <h3> All layouts </h3>
+
+<div class="container">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+</div>
 
 <div class="container mt-5 bg-primary">
 

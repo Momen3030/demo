@@ -15,7 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title');//not null
             $table->text('body')->nullable();  // allow null
             $table->string('slug')->default(' default slug');
             $table->timestamps();

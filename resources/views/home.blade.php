@@ -1,36 +1,23 @@
-@extends('layouts.master')
-@section('maindiv')
-   <h1> Home </h1>
-   <table class="table">
-    <tr>
-        <th>index</th>
-        <th> key </th>
-        <th> value </th>
-    </tr>
-       @foreach($postsData as $key =>$val)
-           <tr>
-               <td> {{$loop->index}}</td>
-               <td> {{$key}} </td>
-               <td> {{$val}} </td>
+@extends('layouts.app')
 
-           </tr>
-       @endforeach
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
 
-   </table>
-@stop
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-
-@section('warningcontent')
-    <h3> Test content  </h3>
-    <h3> Test content  </h3>
-    <h3> Test content  </h3>
-    <h3> Test content  </h3>
-@stop
-
-
-@section('testcontent')
-    <h3> Test content  </h3>
-    <h3> Test content  </h3>
-
-@stop
-
+                  {{Auth::user()->name}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

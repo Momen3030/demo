@@ -104,7 +104,7 @@ Route::post('/posts/submit',[PostController::class,"store"]);
 
 // controller return one function
 // use invokable controller
-Route::get('/home',HomeController::class);
+//Route::get('/home',HomeController::class);
 
 //Route::get('/hello',[HomeController::class,'sayHi']); no meaning
 
@@ -131,10 +131,13 @@ use crud operation [create,select,update,delete]
 //Route::get('/articles/create',[AritcleController::class,'create'])->name('artiles.create');
 //
 Route::resource('articles',AritcleController::class);
+//    ->middleware('auth');
 /// put request update
 //Route::put('/articles/{article}',[AritcleController::class,'update']);
 
 
+Route::get('/blog/{user}',[\App\Http\Controllers\UserController::class,'userposts'])
+    ->name('user.posts');
 
 
 ////table db in laravel  Model
@@ -151,3 +154,11 @@ Route::resource('articles',AritcleController::class);
 ////ORM
 /// *datamaper
 ///   *active Recod
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('testauth',function (){
+    return "i am auth";
+})->middleware('auth');

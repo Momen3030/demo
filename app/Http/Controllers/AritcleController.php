@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostValidationRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,11 @@ class AritcleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+     {
+         $this->middleware('auth')->except(['index','show']);
+     }
+
     public function index()
     {
 
@@ -43,19 +49,16 @@ class AritcleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostValidationRequest $request)
     {
 //        dd($request->all());
-//        $article=new Post();
-//        $article->title=$request->title;
-//        $article->body=$request->body;
-//        $article->save();
-  //mass assignment method
-//        Post::create([
-//            'title'=>$request->title,
-//            'body'=>$request->body
+//        $request->validate([   //rules apply to input
+//            'title'=>'required|min:3',
+//             'body'=>'max:10'
+//        ],[
+//            'title.required'=>'please Write descriptive title',
+//            'title.min'=>'title must be more than 3 letters'
 //        ]);
-//      dd($request->all());
         Post::create($request->all());
         return redirect(route('articles.index'));
     }
@@ -68,6 +71,7 @@ class AritcleController extends Controller
      */
     public function show(Post $article)
     {
+//        dd($article,$article->user->name);
 //        $post =Post::findOrfail($article); not use find or fail old way
 //        dd($article);
         return view('articles.show',compact('article'));
@@ -93,12 +97,15 @@ class AritcleController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $article)
+    public function update(PostValidationRequest $request, Post $article)
     {
-//        return "done";
-//        $article->title=$request->title;
-//        $article->body=$request->body;
-//        $article->save();
+//        $request->validate([   //rules apply to input
+//            'title'=>'required|min:3',
+//            'body'=>'max:10'
+//        ],[
+//            'title.required'=>'please Write descriptive title',
+//            'title.min'=>'title must be more than 3 letters'
+//        ]);
         $article->update($request->all());
         return redirect(route('articles.index'));
     }
